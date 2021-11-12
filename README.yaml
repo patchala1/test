@@ -1,0 +1,144 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: "terraform-aws-components"
+
+# Tags of this project
+tags:
+  - terraform
+  - terraform-modules
+  - aws
+  - components
+  - terraform-components
+  - root
+  - geodesic
+  - reference-implementation
+  - reference-architecture
+
+# Categories of this project
+categories:
+  - terraform-modules/root
+  - terraform-components
+
+# Logo for this project
+#logo: docs/logo.png
+
+# License of this project
+license: "APACHE2"
+
+# Canonical GitHub repo
+github_repo: "cloudposse/terraform-aws-components"
+
+# Badges to display
+badges:
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-components.svg"
+    url: "https://github.com/cloudposse/terraform-aws-components/releases/latest"
+  - name: "Slack Community"
+    image: "https://slack.cloudposse.com/badge.svg"
+    url: "https://slack.cloudposse.com"
+
+references:
+  - name: "Cloud Posse Documentation"
+    description: "Complete documentation for the Cloud Posse solution"
+    url: "https://docs.cloudposse.com"
+
+related:
+  - name: "reference-architectures"
+    description: "Get up and running quickly with one of our reference architecture using our fully automated cold-start process."
+    url: "https://github.com/cloudposse/reference-architectures"
+  - name: "audit.cloudposse.co"
+    description: "Example Terraform Reference Architecture of a Geodesic Module for an Audit Logs Organization in AWS."
+    url: "https://github.com/cloudposse/audit.cloudposse.co"
+  - name: "prod.cloudposse.co"
+    description: "Example Terraform Reference Architecture of a Geodesic Module for a Production Organization in AWS."
+    url: "https://github.com/cloudposse/prod.cloudposse.co"
+  - name: "staging.cloudposse.co"
+    description: "Example Terraform Reference Architecture of a Geodesic Module for a Staging Organization in AWS."
+    url: "https://github.com/cloudposse/staging.cloudposse.co"
+  - name: "dev.cloudposse.co"
+    description: "Example Terraform Reference Architecture of a Geodesic Module for a Development Sandbox Organization in AWS."
+    url: "https://github.com/cloudposse/dev.cloudposse.co"
+
+# Short description of this project
+description: |-
+  This is a collection of reusable Terraform components and blueprints for provisioning reference architectures.
+
+introduction: |-
+  In this repo you'll find real-world examples of how we've implemented various common patterns using our [terraform modules](https://cpco.io/terraform-modules) for our customers.
+
+  The component catalog captures the business logic, opinions, best practices and non-functional requirements.
+
+  It's from this catalog that other developers in your organization will pick and choose from anytime they need to deploy some new capability.
+
+  These components make a lot of assumptions about how we've configured our environments. That said, they can still serve as an excellent reference for others.
+
+  ## Deprecations
+
+  Terraform components which are no longer actively maintained are now in the `deprecated/` folder.
+
+  Many of these deprecated components are used in our old reference architectures.
+
+  We intend to eventually delete, but are leaving them for now in the repo.
+
+  ## Using `pre-commit` Hooks
+
+  This repository uses [pre-commit](https://pre-commit.com/) and [pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform) to enforce consistent Terraform code and documentation. This is accomplished by triggering hooks during `git commit` to block commits that don't pass checks (E.g. format, and module documentation). You can find the hooks that are being executed in the [`.pre-commit-config.yaml`](.pre-commit-config.yaml) file.
+
+  You can install [pre-commit](https://pre-commit.com/) and this repo's pre-commit hooks on a Mac machine by running the following commands:
+
+  ```bash
+  brew install pre-commit gawk terraform-docs coreutils
+  pre-commit install --install-hooks
+  ```
+
+  Then run the following command to rebuild the docs for all Terraform components:
+
+  ```bash
+  make rebuild-docs
+  ```
+
+# How to use this project
+usage: |-
+  See each component's README directory for usage.
+
+  | Component | Description |
+  |-----------|-------------|
+  |[account](./modules/account) | Provisions the full account hierarchy along with Organizational Units (OUs). |
+  |[account-map](./modules/account-map) | Provisions information only: it simply populates Terraform state with data (account ids, groups, and roles) that other root modules need via outputs. |
+  |[account-settings](./modules/account-settings) | Provisions account level settings: IAM password policy, AWS Account Alias, and EBS encryption. |
+  |[cloudtrail](./modules/cloudtrail) | Provisions cloudtrail auditing in an individual account. |
+  |[cloudtrail-bucket](./modules/cloudtrail-bucket) | Provisions a bucket for storing cloudtrail logs for auditing purposes. |
+  |[datadog-integration](./modules/datadog-integration) | Provisions a DataDog <=> AWS integration. |
+  |[datadog-monitor](./modules/datadog-monitor) | Provisions global DataDog monitors. |
+  |[dns-delegated](./modules/dns-delegated) | Provisions a DNS zone which delegates nameservers to the DNS zone in the primary DNS account. |
+  |[dns-primary](./modules/dns-primary) | Provisions the primary DNS zones into an AWS account. |
+  |[ecr](./modules/ecr) | Provisions repositories, lifecycle rules, and permissions for streamlined ECR usage. |
+  |[efs](./modules/efs) | Provisions an [EFS](https://aws.amazon.com/efs/) Network File System with KMS encryption-at-rest. |
+  |[eks](./modules/eks) | Provisions an end-to-end EKS Cluster, including managed node groups and [spotinst ocean](https://spot.io/products/ocean/) node pools. |
+  |[eks-iam](./modules/eks-iam) | Provisions specific [IAM roles for Kubernetes Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html). |
+  |[iam-delegated-roles](./modules/iam-delegated-roles) | Provisions all delegated user and system IAM roles. |
+  |[iam-primary-roles](./modules/iam-primary-roles) | Provisions all primary user and system roles into the centralized identity account. |
+  |[sso](./modules/sso) | Provisions SAML metadata into AWS IAM as new SAML providers. |
+  |[tfstate-backend](./modules/tfstate-backend) | Provisions an S3 Bucket and DynamoDB table that follow security best practices for usage as a Terraform backend. |
+  |[transit-gateway](./modules/transit-gateway) | Provisions an AWS Transit Gateway to connect various account separated VPCs through a central hub. |
+  |[vpc](./modules/vpc) | Provisions a VPC and corresponing Subnets. |
+
+include:
+  - "docs/targets.md"
+  - "docs/terraform.md"
+
+# Contributors to this project
+contributors:
+  - name: "Erik Osterman"
+    github: "osterman"
+  - name: "Igor Rodionov"
+    github: "goruha"
+  - name: "Andriy Knysh"
+    github: "aknysh"
+  - name: "Matt Gowie"
+    github: "Gowiem"
